@@ -82,7 +82,10 @@ class ChecklistRemoteViewsFactory(
 
     private fun styled(markdown: String) = MarkdownStyler.style(markdown, themeColors)
 
-    /** Tap target for a row: first external link, else first internal link opened in Obsidian. */
+    /**
+     * Tap target for a row: first external link, else first internal link opened in Obsidian,
+     * else the note itself.
+     */
     private fun linkIntent(markdown: String): Intent {
         val parsed = MarkdownInline.parse(markdown)
         val url = parsed.firstUrl ?: parsed.firstInternalLink?.let { target ->
@@ -95,10 +98,16 @@ class ChecklistRemoteViewsFactory(
                 .build()
                 .toString()
         }
-        return Intent().apply {
-            if (url != null) putExtra(ObsidianWidgetProvider.EXTRA_URL, url)
+        return if (url != null) {
+            Intent().putExtra(ObsidianWidgetProvider.EXTRA_URL, url)
+        } else {
+            openNoteIntent()
         }
     }
+
+    /** Rows without their own action open the note in Obsidian. */
+    private fun openNoteIntent(): Intent =
+        Intent().putExtra(ObsidianWidgetProvider.EXTRA_OPEN_NOTE, true)
 
     /**
      * Draws one vertical bar per blockquote level and tints callout rows. Always resets the
@@ -154,7 +163,7 @@ class ChecklistRemoteViewsFactory(
     private fun horizontalRuleView(): RemoteViews {
         val views = RemoteViews(context.packageName, R.layout.widget_horizontal_rule_item)
         views.setInt(R.id.horizontal_rule_line, "setColorFilter", themeColors.textSecondary)
-        views.setOnClickFillInIntent(R.id.horizontal_rule_root, Intent())
+        views.setOnClickFillInIntent(R.id.horizontal_rule_root, openNoteIntent())
         return views
     }
 
@@ -179,7 +188,7 @@ class ChecklistRemoteViewsFactory(
         views.setTextViewText(R.id.code_item_content, text)
         views.setInt(R.id.code_item_content, "setGravity", if (isMath) Gravity.CENTER_HORIZONTAL else Gravity.START)
         views.setTextColor(R.id.code_item_content, themeColors.text)
-        views.setOnClickFillInIntent(R.id.code_item_root, Intent())
+        views.setOnClickFillInIntent(R.id.code_item_root, openNoteIntent())
         return views
     }
 

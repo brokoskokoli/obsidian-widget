@@ -16,18 +16,24 @@
         android:paddingBottom="8dp">
 
         <LinearLayout
+            android:id="@+id/widget_title_area"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="44dp"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/widget_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Daily Note"
                 android:textColor="@color/obsidian_text"
-                android:textSize="15sp"
+                android:textSize="17sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="sans-serif-medium" />
 
             <TextView

@@ -30,6 +30,7 @@ class ObsidianWidgetProvider : AppWidgetProvider() {
         const val EXTRA_APPEND_TO_WIDGET = "extra_append_to_widget"
         const val EXTRA_WIDGET_ID = "extra_widget_id"
         const val EXTRA_URL = "extra_url"
+        const val EXTRA_OPEN_NOTE = "extra_open_note"
 
         fun updateAllWidgets(context: Context) {
             val intent = Intent(context, ObsidianWidgetProvider::class.java).apply {
@@ -99,6 +100,10 @@ class ObsidianWidgetProvider : AppWidgetProvider() {
                         }
                         context.startActivity(browseIntent)
                     } catch (_: Exception) { }
+                    return
+                }
+                if (intent.getBooleanExtra(EXTRA_OPEN_NOTE, false)) {
+                    openObsidian(context, intent.getIntExtra(EXTRA_WIDGET_ID, -1))
                     return
                 }
                 val lineIndex = intent.getIntExtra(EXTRA_LINE_INDEX, -1)
@@ -213,9 +218,9 @@ class ObsidianWidgetProvider : AppWidgetProvider() {
             createActionIntent(context, ACTION_ADD, appWidgetId)
         )
 
-        // Title click always opens note in Obsidian
+        // Tapping the title area (title + TODO count) opens the note in Obsidian
         views.setOnClickPendingIntent(
-            R.id.widget_date,
+            R.id.widget_title_area,
             createActionIntent(context, ACTION_OPEN, appWidgetId)
         )
 
@@ -269,10 +274,10 @@ class ObsidianWidgetProvider : AppWidgetProvider() {
             if (vaultManager.showAddButton || vaultManager.showNoteButton) View.VISIBLE else View.GONE
         )
 
-        // Absorb taps on empty space so they don't trigger launcher reconfigure
+        // Taps on empty space open the note (and don't trigger launcher reconfigure)
         views.setOnClickPendingIntent(
             R.id.widget_root,
-            createActionIntent(context, ACTION_REFRESH, appWidgetId)
+            createActionIntent(context, ACTION_OPEN, appWidgetId)
         )
 
         // Apply widget transparency
