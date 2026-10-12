@@ -36,6 +36,7 @@ class WidgetConfigActivity : AppCompatActivity() {
     private lateinit var sortUncheckedToggle: Switch
     private lateinit var hidePropertiesToggle: Switch
     private lateinit var tapCheckboxOnlyToggle: Switch
+    private lateinit var tapContentOpensNoteToggle: Switch
     private lateinit var showAddToTopToggle: Switch
     private lateinit var showTodoCountToggle: Switch
     private lateinit var dateFormatInput: EditText
@@ -98,6 +99,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         sortUncheckedToggle = findViewById(R.id.config_sort_unchecked)
         hidePropertiesToggle = findViewById(R.id.config_hide_properties)
         tapCheckboxOnlyToggle = findViewById(R.id.config_tap_checkbox_only)
+        tapContentOpensNoteToggle = findViewById(R.id.config_tap_content_opens_note)
         showAddToTopToggle = findViewById(R.id.config_show_add_to_top)
         showTodoCountToggle = findViewById(R.id.config_show_todo_count)
         dateFormatInput = findViewById(R.id.config_date_format)
@@ -168,6 +170,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         sortUncheckedToggle.isChecked = vaultManager.sortUnchecked
         hidePropertiesToggle.isChecked = vaultManager.hideProperties
         tapCheckboxOnlyToggle.isChecked = vaultManager.tapCheckboxOnly
+        tapContentOpensNoteToggle.isChecked = vaultManager.tapContentOpensNote
         showAddToTopToggle.isChecked = vaultManager.showAddToTop
         showTodoCountToggle.isChecked = vaultManager.showTodoCount
         dateFormatInput.setText(vaultManager.dateFormat)
@@ -310,6 +313,7 @@ class WidgetConfigActivity : AppCompatActivity() {
             hideProperties = hidePropertiesToggle.isChecked,
             widgetAlpha = transparencySeekBar.progress,
             tapCheckboxOnly = tapCheckboxOnlyToggle.isChecked,
+            tapContentOpensNote = tapContentOpensNoteToggle.isChecked,
             addToTop = vaultManager.addToTop,
             showAddToTop = showAddToTopToggle.isChecked,
             widgetTheme = when (themeGroup.checkedRadioButtonId) {

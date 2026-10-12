@@ -274,10 +274,15 @@ class ObsidianWidgetProvider : AppWidgetProvider() {
             if (vaultManager.showAddButton || vaultManager.showNoteButton) View.VISIBLE else View.GONE
         )
 
-        // Taps on empty space open the note (and don't trigger launcher reconfigure)
+        // Taps on empty space open the note if enabled, otherwise refresh
+        // (either way they don't trigger launcher reconfigure)
         views.setOnClickPendingIntent(
             R.id.widget_root,
-            createActionIntent(context, ACTION_OPEN, appWidgetId)
+            createActionIntent(
+                context,
+                if (vaultManager.tapContentOpensNote) ACTION_OPEN else ACTION_REFRESH,
+                appWidgetId
+            )
         )
 
         // Apply widget transparency

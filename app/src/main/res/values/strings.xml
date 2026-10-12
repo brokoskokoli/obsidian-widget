@@ -28,4 +28,6 @@
     <string name="no_note_selected">No note selected</string>
     <string name="select_note">Pick Note</string>
     <string name="note_selected">%s</string>
+    <string name="config_tap_content_opens_note">Tap note content to open it</string>
+    <string name="config_tap_content_opens_note_hint">When off, only the title opens the note in Obsidian. Links and tasks keep their own action.</string>
 </resources>

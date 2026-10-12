@@ -345,6 +345,52 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp" />
 
+                <!-- Tap note content to open it -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/config_tap_content_opens_note"
+                            android:textColor="@color/obsidian_text"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/config_tap_content_opens_note_hint"
+                            android:textColor="@color/obsidian_text_secondary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <Switch
+                        android:id="@+id/config_tap_content_opens_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/obsidian_primary"
+                        android:trackTint="@color/obsidian_text_secondary" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/obsidian_bg"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp" />
+
                 <!-- Show add-to-top -->
                 <LinearLayout
                     android:layout_width="match_parent"

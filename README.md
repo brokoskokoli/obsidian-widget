@@ -56,7 +56,7 @@ Or open in Android Studio and click **Run**.
 - **System, dark & light themes** — follow Android automatically or choose a fixed look
 - **Widget transparency** — adjustable opacity to blend with your wallpaper
 - **Auto-refresh** — updates every 15 minutes and on screen unlock
-- **Deep link to Obsidian** — tap the title to open the note in Obsidian
+- **Deep link to Obsidian** — tap the title (or, optionally, the note content) to open the note in Obsidian
 - **Per-widget settings** — each widget has independent configuration
 
 ## Widget Configuration
@@ -75,6 +75,7 @@ All settings are per-widget. Tap the ⚙ icon on any widget to access:
 | Sort Unchecked | Move incomplete tasks to the top |
 | Hide Properties | Hide leading YAML frontmatter from the widget |
 | Tap Checkbox Only | Require tapping the checkbox circle to toggle |
+| Tap Note Content to Open It | Tapping text, headings or empty space opens the note in Obsidian (on by default); when off, only the title does |
 | Show Add-to-Top | Show the add-to-top toggle on capture dialogs |
 | Show TODO Count | Display unchecked task count in the header |
 | Theme | Follow the system theme, or use Dark or Light |

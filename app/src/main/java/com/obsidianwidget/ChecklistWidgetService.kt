@@ -33,6 +33,7 @@ class ChecklistRemoteViewsFactory(
 
     private var items = listOf<VaultManager.ChecklistItem>()
     private var tapCheckboxOnly = false
+    private var tapContentOpensNote = true
     private var vaultName: String? = null
     private var themeColors = VaultManager.ThemeColors(
         bg = 0xFF1A1A1E.toInt(),
@@ -56,6 +57,7 @@ class ChecklistRemoteViewsFactory(
         val vaultManager = VaultManager(context, widgetId)
         items = vaultManager.parseChecklist()
         tapCheckboxOnly = vaultManager.tapCheckboxOnly
+        tapContentOpensNote = vaultManager.tapContentOpensNote
         themeColors = vaultManager.getThemeColors()
         vaultName = vaultManager.vaultName
     }
@@ -84,7 +86,7 @@ class ChecklistRemoteViewsFactory(
 
     /**
      * Tap target for a row: first external link, else first internal link opened in Obsidian,
-     * else the note itself.
+     * else the note itself (if enabled).
      */
     private fun linkIntent(markdown: String): Intent {
         val parsed = MarkdownInline.parse(markdown)
@@ -105,9 +107,11 @@ class ChecklistRemoteViewsFactory(
         }
     }
 
-    /** Rows without their own action open the note in Obsidian. */
+    /** Rows without their own action open the note in Obsidian, unless disabled in the settings. */
     private fun openNoteIntent(): Intent =
-        Intent().putExtra(ObsidianWidgetProvider.EXTRA_OPEN_NOTE, true)
+        Intent().apply {
+            if (tapContentOpensNote) putExtra(ObsidianWidgetProvider.EXTRA_OPEN_NOTE, true)
+        }
 
     /**
      * Draws one vertical bar per blockquote level and tints callout rows. Always resets the

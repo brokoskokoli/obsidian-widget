@@ -76,6 +76,7 @@ class VaultManager(private val context: Context, private val widgetId: Int = -1)
         private const val KEY_CURRENT_NOTE_INDEX = "current_note_index"
         private const val KEY_WIDGET_ALPHA = "widget_alpha"
         private const val KEY_TAP_CHECKBOX_ONLY = "tap_checkbox_only"
+        private const val KEY_TAP_CONTENT_OPENS_NOTE = "tap_content_opens_note"
         private const val KEY_ADD_TO_TOP = "add_to_top"
         private const val KEY_SHOW_ADD_TO_TOP = "show_add_to_top"
         private const val KEY_WIDGET_THEME = "widget_theme"
@@ -106,6 +107,7 @@ class VaultManager(private val context: Context, private val widgetId: Int = -1)
                 .remove("${KEY_CURRENT_NOTE_INDEX}_$widgetId")
                 .remove("${KEY_WIDGET_ALPHA}_$widgetId")
                 .remove("${KEY_TAP_CHECKBOX_ONLY}_$widgetId")
+                .remove("${KEY_TAP_CONTENT_OPENS_NOTE}_$widgetId")
                 .remove("${KEY_ADD_TO_TOP}_$widgetId")
                 .remove("${KEY_SHOW_ADD_TO_TOP}_$widgetId")
                 .remove("${KEY_WIDGET_THEME}_$widgetId")
@@ -284,6 +286,10 @@ class VaultManager(private val context: Context, private val widgetId: Int = -1)
         get() = prefs.getBoolean(wk(KEY_TAP_CHECKBOX_ONLY), false)
         set(value) = prefs.edit().putBoolean(wk(KEY_TAP_CHECKBOX_ONLY), value).apply()
 
+    var tapContentOpensNote: Boolean
+        get() = prefs.getBoolean(wk(KEY_TAP_CONTENT_OPENS_NOTE), true)
+        set(value) = prefs.edit().putBoolean(wk(KEY_TAP_CONTENT_OPENS_NOTE), value).apply()
+
     var addToTop: Boolean
         get() = prefs.getBoolean(wk(KEY_ADD_TO_TOP), false)
         set(value) = prefs.edit().putBoolean(wk(KEY_ADD_TO_TOP), value).apply()
@@ -354,6 +360,7 @@ class VaultManager(private val context: Context, private val widgetId: Int = -1)
         hideProperties: Boolean,
         widgetAlpha: Int,
         tapCheckboxOnly: Boolean,
+        tapContentOpensNote: Boolean,
         addToTop: Boolean,
         showAddToTop: Boolean,
         widgetTheme: String,
@@ -370,6 +377,7 @@ class VaultManager(private val context: Context, private val widgetId: Int = -1)
             .putBoolean(wk(KEY_HIDE_PROPERTIES), hideProperties)
             .putInt(wk(KEY_WIDGET_ALPHA), widgetAlpha)
             .putBoolean(wk(KEY_TAP_CHECKBOX_ONLY), tapCheckboxOnly)
+            .putBoolean(wk(KEY_TAP_CONTENT_OPENS_NOTE), tapContentOpensNote)
             .putBoolean(wk(KEY_ADD_TO_TOP), addToTop)
             .putBoolean(wk(KEY_SHOW_ADD_TO_TOP), showAddToTop)
             .putString(wk(KEY_WIDGET_THEME), widgetTheme)
